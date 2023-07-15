@@ -7,7 +7,7 @@ const { pool, router, Result } = require('../connect')
 
 router.get('/', (req, res) => {
     pool.getConnection((err, conn) => {
-        conn.query("SELECT * FROM wp_options", (e, r) => {
+        conn.query("SELECT * FROM database", (e, r) => {
             if(e) throw error
             res.json(new Result({ data: r }))
         })
