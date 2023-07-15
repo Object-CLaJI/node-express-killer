@@ -21,7 +21,6 @@ const option = {
     port: '',
     database: '',
     connectTimeout: 5000, 
-    multipleStatements: false 
 }
 let pool;
 repool()
@@ -36,8 +35,8 @@ function repool() {
     pool = mysql.createPool({
         ...option,
         waitForConnections: true, //当无连接池可用时，等待（true）还是抛错（false）
-        connectionLimit: 100, //连接数限制
-        queueLimit: 0 //最大连接等待数（0为不限制）
+        connectionLimit:1 , //连接数限制
+        queueLimit: 1 //最大连接等待数（0为不限制）
     })
     pool.on('error', err => {
         err.code === 'PROTOCOL_CONNECTION_LOST' && setTimeout(repool, 2000)
